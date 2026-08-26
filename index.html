@@ -2,201 +2,147 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="noindex, nofollow, noarchive">
-    <title>Our Special Story ✨</title>
+    <title>🎂 Happy Birthday Surprise!</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-            height: 100vh;
-            overflow: hidden;
+            background: #fff8e7;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: #fff;
+            overflow-x: hidden;
         }
 
-        #starCanvas {
+        .box {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 179, 0, 0.15);
+            text-align: center;
+            width: 90%;
+            max-width: 360px;
+            border: 2px dashed #ffb300;
+        }
+
+        /* 蛋糕和蜡烛 */
+        .cake-container {
+            font-size: 70px;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            margin: 10px 0;
+            transition: transform 0.2s;
+        }
+        .cake-container:active { transform: scale(0.95); }
+
+        .flame {
+            font-size: 28px;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.8s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+            100% { opacity: 1; transform: translateX(-50%) scale(1.2); }
+        }
+
+        h2 { color: #d84315; margin-bottom: 8px; font-size: 22px; }
+        p.sub { font-size: 13px; color: #8d6e63; margin-bottom: 20px; }
+
+        /* 刮刮乐卡片 */
+        .scratch-card {
+            background: #ffecb3;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .prize-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+        }
+
+        .cover-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
-        }
-
-        .container {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-        }
-
-        /* 拍立得相框卡片 */
-        .polaroid {
-            background: #ffffff;
-            padding: 15px 15px 25px 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            transform: rotate(-3deg);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .polaroid:hover {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 25px 50px rgba(255, 105, 180, 0.3);
-        }
-
-        .photo-box {
-            width: 250px;
-            height: 250px;
-            background: #eee;
-            overflow: hidden;
+            background: #b0bec5;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .photo-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .polaroid-caption {
-            color: #333;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 15px;
-            letter-spacing: 1px;
-        }
-
-        .title {
-            margin-top: 30px;
-            font-size: 22px;
-            font-weight: 600;
-            color: #ffd1dc;
-            text-shadow: 0 0 10px rgba(255, 209, 220, 0.5);
-        }
-
-        .message {
-            margin-top: 12px;
-            font-size: 14px;
-            line-height: 1.8;
-            color: #cfd8dc;
-            padding: 0 10px;
-        }
-
-        .days-counter {
-            margin-top: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            padding: 8px 20px;
-            border-radius: 20px;
+            color: #37474f;
             font-size: 13px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+            transition: opacity 0.4s ease;
+        }
+
+        .cover-overlay.revealed {
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <canvas id="starCanvas"></canvas>
 
-    <div class="container">
-        <div class="polaroid" onclick="alert('你是我最想留住的幸运 ✨')">
-            <div class="photo-box">
-                <!-- 【可修改部分】：替换图片链接或本地照片 -->
-                <img src="baoshangen.jpg">
-            </div>
-            <!-- 【可修改部分】：相框下方文字与日期 -->
-            <div class="polaroid-caption">Our Unforgettable Moment 💖</div>
+    <div class="box">
+        <!-- 【可修改部分】：被祝福人生日名字 -->
+        <h2>🎉 Happy Birthday to 小美!</h2>
+        <p class="sub">👉 点击蜡烛吹灭它并许个愿 👈</p>
+
+        <div class="cake-container" id="cake" onclick="blowCandle()">
+            <div class="flame" id="flame">🔥</div>
+            🎂
         </div>
 
-        <!-- 【可修改部分】：主标题与名字 -->
-        <div class="title">To: 亲爱的宝贝</div>
-        
-        <!-- 【可修改部分】：深情长文案 -->
-        <div class="message">
-            星河滚烫，你是人间理想。<br>
-            感谢你走进我的生命，让每一个平凡的日子都充满期待。
-        </div>
+        <p id="wishStatus" style="font-size: 14px; color: #e65100; font-weight: bold; min-height: 20px;"></p>
 
-        <!-- 【可修改部分】：纪念日天数 -->
-        <div class="days-counter">我们已经在一起 <b>520</b> 天啦 💫</div>
+        <!-- 刮刮乐趣味抽奖区 -->
+        <div class="scratch-card" onclick="revealPrize()">
+            <!-- 【可修改部分】：藏在刮刮乐底下的礼物/承诺 -->
+            <div class="prize-text">🎁 获得：兑现任意愿望券 ×1 + 奶茶一杯！</div>
+            <div class="cover-overlay" id="overlay">✨ 点击刮开你的专属生日礼物 ✨</div>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        // 流星与繁星背景绘制
-        const canvas = document.getElementById('starCanvas');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+        let isBlown = false;
 
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
+        function blowCandle() {
+            if (isBlown) return;
+            isBlown = true;
+            document.getElementById('flame').style.display = 'none';
+            document.getElementById('wishStatus').innerText = "✨ 愿望已送达银河系，岁岁皆胜意！";
 
-        const stars = Array.from({ length: 80 }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.random() * 1.5,
-            alpha: Math.random()
-        }));
-
-        const meteors = [];
-
-        function addMeteor() {
-            meteors.push({
-                x: Math.random() * width,
-                y: 0,
-                length: Math.random() * 80 + 20,
-                speed: Math.random() * 10 + 6,
-                angle: Math.PI / 4
+            // 触发全屏五彩纸屑
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
             });
         }
 
-        setInterval(addMeteor, 2000);
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-
-            // 绘制星星
-            stars.forEach(star => {
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-                ctx.fill();
+        function revealPrize() {
+            document.getElementById('overlay').classList.add('revealed');
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { y: 0.8 }
             });
-
-            // 绘制流星
-            meteors.forEach((meteor, index) => {
-                ctx.beginPath();
-                ctx.moveTo(meteor.x, meteor.y);
-                ctx.lineTo(meteor.x - meteor.length, meteor.y + meteor.length);
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
-
-                meteor.x += meteor.speed;
-                meteor.y += meteor.speed;
-
-                if (meteor.y > height || meteor.x > width) {
-                    meteors.splice(index, 1);
-                }
-            });
-
-            requestAnimationFrame(animate);
         }
-        animate();
     </script>
 </body>
 </html>
